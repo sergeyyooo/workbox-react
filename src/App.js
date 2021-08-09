@@ -19,7 +19,7 @@ function App() {
   return (
     <div className="App">
       {
-        data.map(i=><div className = 'cube'></div>)
+        data.map((i, idx)=><div className = 'cube' key = {i}>{i}</div>)
       }
      </div>
   );
