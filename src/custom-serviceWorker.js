@@ -17,10 +17,10 @@ self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
 // //Cache cdn files and external links
-workbox.routing.registerRoute(
-  new RegExp('https:.*\.(css|js|json|html)'),
-  new workbox.strategies.NetworkFirst({ cacheName: 'external-cache'})
-)
+// workbox.routing.registerRoute(
+//   new RegExp('https:.*\.(css|js|json|html)'),
+//   new workbox.strategies.NetworkFirst({ cacheName: 'external-cache'})
+// )
 
 // app-shell
 workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst());
