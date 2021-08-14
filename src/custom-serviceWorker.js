@@ -16,6 +16,7 @@ self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 // eslint-disable-next-line
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
+workbox.routing.registerRoute(new workbox.precaching.NavigationRoute(workbox.precaching.createHandlerBoundToURL('/index.html')))
 // //Cache cdn files and external links
 workbox.routing.registerRoute(
   new RegExp('https:.*\.(css|js|json|html)'),
