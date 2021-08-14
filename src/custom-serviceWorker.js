@@ -1,27 +1,27 @@
+import { createHandlerBoundToURL, precacheAndRoute } from 'workbox-precaching';
+import { registerRoute, NavigationRoute } from 'workbox-routing';
+import { skipWaiting, clientsClaim } from 'workbox-core';
+import {
+  NetworkFirst,
+  StaleWhileRevalidate,
+  CacheFirst,
+} from 'workbox-strategies';
 /* eslint-disable no-undef */
 
-if (workbox) {
-  console.log(`Workbox is loaded 🎉`);
-} else {
-  console.log(`Workbox didn't load `);
-}
-
 // eslint-disable-next-line
-workbox.precaching.precacheAndRoute(self.__precacheManifest);
-
-
+precacheAndRoute(self.__WB_MANIFEST);
 
 // eslint-disable-next-line
 self.addEventListener('install', event => event.waitUntil(self.skipWaiting()));
 // eslint-disable-next-line
 self.addEventListener('activate', event => event.waitUntil(self.clients.claim()));
 
-workbox.routing.registerRoute(new workbox.precaching.NavigationRoute(workbox.precaching.createHandlerBoundToURL('/index.html')))
+registerRoute(new NavigationRoute(createHandlerBoundToURL('/index.html')))
 // //Cache cdn files and external links
-workbox.routing.registerRoute(
+registerRoute(
   new RegExp('https:.*\.(css|js|json|html)'),
-  new workbox.strategies.NetworkFirst({ cacheName: 'external-cache'})
+  new NetworkFirst({ cacheName: 'external-cache'})
 )
 
 // app-shell
-workbox.routing.registerRoute("/", new workbox.strategies.NetworkFirst());
+registerRoute("/", new NetworkFirst());
